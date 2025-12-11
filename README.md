@@ -36,3 +36,12 @@ About 200 entries will be produced from the run of the demo script
 
 ## Data source
 The source of this data is present [here](https://www.kaggle.com/datasets/waalbannyantudre/hate-speech-detection-curated-dataset/data?select=HateSpeechDatasetBalanced.csv). Data is procured through kagglehub so no need for direct downloading of the dataset
+
+## Explanation of hyperparameters for model approach
+To reach the desired desult of significant improvement over the baseline, several hyperparameters were considered:
+- learning rate: Separate learning rates were used for the classifier network and the DistilBeRT model. This is to ensure that the classifier is trained more aggressively but BeRT, which has already been fine tuned generally on text data is not impacted as much when training on the hate speech dataset
+- Freezing layers: in addition to the separate learning rates, controlling the layers exposed to adjustment for DistilBeRT allows it to not be adjusted as much, making DistilBeRT not adjust as much, increasing accuracy
+- loss function: BCEWithLogitsLoss was employed as it was primarily other BeRT based projects focused on text classification
+
+## Additional notes
+All of the testing, though the source is the properly broken down project, has been done within the [hate_speech_analysis notebook](./hate_speech_analysis.ipynb), where the results of both the DistilBeRT approach and the base transformer encoder approach can be seen.
